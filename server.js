@@ -41,37 +41,55 @@ router.get('/books', (ctx, next) => {
 
 router.delete('/books/:id', (ctx, next) => {
     return deleteController.deleteBook(ctx.params.id).then((res) => {
-        ctx.status = 200;
+        ctx.body = res;
+    })
+})
+
+router.delete('/books/:books_id/unjoin/author', (ctx, next) => {
+    return deleteController.unJoinBookFromAuthor(ctx.params.books_id).then((res) => {
+        ctx.body = res;
+    })
+})
+
+router.delete('/author/:author_id/unjoin/book', (ctx, next) => {
+    return deleteController.unJoinAuthorFromBook(ctx.params.author_id).then((res) => {
+        ctx.body = res;
     })
 })
 
 router.delete('/author/:id', (ctx, next) => {
     return deleteController.deleteAuthor(ctx.params.id).then((res) => {
-        ctx.status = 200;
+        ctx.body = res;
     })
 })
 
+router.post('/books/:books_idbooks/join/author/:author_idauthor', (ctx, next) => {
+    return createController.joinBookToAuthor(ctx.params).then((res) => {
+        ctx.body = res;
+    })
+}) 
+
 router.post('/books', (ctx, next) => {
     return createController.createBook(ctx.request.body).then((res) => {
-        ctx.status = 200;
+        ctx.body = 200;
     })
 })
 
 router.post('/author', (ctx, next) => {
     return createController.createAuthor(ctx.request.body).then((res) => {
-        ctx.status = 200;
+        ctx.body = 200;
     })
 })
 
 router.put('/author', (ctx, next) => {
     return updateController.updateAuthor(ctx.request.body).then((res) => {
-        ctx.status = 200;
+        ctx.body = 200;
     })
 })
 
 router.put('/books', (ctx, next) => {
     return updateController.updateBook(ctx.request.body).then((res) => {
-        ctx.status = 200;
+        ctx.body = 200;
     })
 })
 

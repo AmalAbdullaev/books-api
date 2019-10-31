@@ -12,8 +12,8 @@ function databaseTransaction(sqlQuery, params) {
             if (error) reject('Ошибка запроса');
             resolve(results);
           });
-    }).catch((res) => {
-        return res;
+    }).catch((error) => {
+        return error;
     })
 }
 
