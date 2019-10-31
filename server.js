@@ -7,8 +7,8 @@ const readController = require('./controllers/read.controller')
 
  
  
-router.get('/', (ctx, next) => {
-    return readController.findAll().then((res) => {
+router.get('/author/:id', (ctx, next) => {
+    return readController.findOneAuthor(ctx.params.id).then((res) => {
         ctx.body = res;
     })
 })

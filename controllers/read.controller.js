@@ -1,11 +1,22 @@
 const db = require('../db');
 
-function findAll() {
+function findAllAuthors() {
     return db.databaseTransaction(`SELECT * FROM author;`);
 }
 
-function findOne(id) {
-    
+function findOneAuthor(id) {
+    return db.databaseTransaction(`SELECT * FROM author WHERE idauthor = ?;`, [id]);
 }
 
-module.exports.findAll = findAll;
+function findAllBooks() {
+    return db.databaseTransaction(`SELECT * FROM books;`);
+}
+
+function findOneBook(id) {
+    return db.databaseTransaction(`SELECT * FROM books WHERE idbooks = ?;`, [id]);
+}
+
+module.exports.findOneAuthor = findOneAuthor;
+module.exports.findOneBook = findOneBook;
+module.exports.findAllAuthors = findAllAuthors;
+module.exports.findAllBooks = findAllBooks;
