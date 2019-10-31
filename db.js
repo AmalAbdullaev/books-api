@@ -10,8 +10,8 @@ function databaseTransaction(sqlQuery, params) {
     return new Promise ((resolve, reject) => {
         connection.query(sqlQuery, params, function (error, results, fields) {
             if (error) throw error;
-            console.log(results[0]);
-            resolve(results[0]);
+            console.log(results);
+            resolve(results);
           });
     })
 }

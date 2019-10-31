@@ -36,27 +36,38 @@ router.get('/books', (ctx, next) => {
 })
 
 router.delete('/books/:id', (ctx, next) => {
-    return deleteController.deleteBook(id).then((res) => {
-        ctx.body = res;
+    return deleteController.deleteBook(ctx.params.id).then((res) => {
+        ctx.status = 200;
     })
 })
 
 router.delete('/author/:id', (ctx, next) => {
-    return readController.deleteAuthor(id).then((res) => {
-        ctx.body = res;
+    return deleteController.deleteAuthor(ctx.params.id).then((res) => {
+        ctx.status = 200;
     })
 })
 
 router.post('/books', (ctx, next) => {
     return createController.createBook(ctx.request.body).then((res) => {
-        ctx.body = res;
         ctx.status = 200;
     })
 })
 
 router.post('/author', (ctx, next) => {
     return createController.createAuthor(ctx.request.body).then((res) => {
-        ctx.body = res;
+        ctx.status = 200;
+    })
+})
+
+router.put('/author', (ctx, next) => {
+    return updateController.updateAuthor(ctx.request.body).then((res) => {
+        ctx.status = 200;
+    })
+})
+
+
+router.put('/books', (ctx, next) => {
+    return updateController.updateBook(ctx.request.body).then((res) => {
         ctx.status = 200;
     })
 })
