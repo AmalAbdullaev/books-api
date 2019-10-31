@@ -9,10 +9,11 @@ const connection = mysql.createConnection({
 function databaseTransaction(sqlQuery, params) {
     return new Promise ((resolve, reject) => {
         connection.query(sqlQuery, params, function (error, results, fields) {
-            if (error) throw error;
-            console.log(results);
+            if (error) reject('Ошибка запроса');
             resolve(results);
           });
+    }).catch((res) => {
+        return res;
     })
 }
 

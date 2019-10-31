@@ -11,6 +11,10 @@ const koaBody = require('koa-body');
 
 app.use(koaBody());
 
+router.get('/', (ctx, next) => {
+    ctx.body = 'hello';
+})
+
 router.get('/author/:id', (ctx, next) => {
     return readController.findOneAuthor(ctx.params.id).then((res) => {
         ctx.body = res;
@@ -24,13 +28,13 @@ router.get('/books/:id', (ctx, next) => {
 })
 
 router.get('/author', (ctx, next) => {
-    return readController.findAllAuthors().then((res) => {
+    return readController.findAllAuthors(ctx.query).then((res) => {
         ctx.body = res;
     })
 })
 
 router.get('/books', (ctx, next) => {
-    return readController.findAllBooks().then((res) => {
+    return readController.findAllBooks(ctx.query).then((res) => {
         ctx.body = res;
     })
 })
@@ -64,7 +68,6 @@ router.put('/author', (ctx, next) => {
         ctx.status = 200;
     })
 })
-
 
 router.put('/books', (ctx, next) => {
     return updateController.updateBook(ctx.request.body).then((res) => {
