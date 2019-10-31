@@ -1,11 +1,11 @@
 const db = require('../db');
 
-function createAuthor(firstname, lastname) {
-    return db.databaseTransaction('INSERT INTO author SET (firstname, lastname) VALUES ( ?, ?)', [firstname, lastname]);
+function createAuthor(author) {
+    return db.databaseTransaction('INSERT INTO author SET ?', author);
 }
 
-function createBook(title, description) {
-    return db.databaseTransaction('INSERT INTO books SET (title, description) VALUES ( ?, ?)', [title, description]);
+function createBook(book) {
+    return db.databaseTransaction('INSERT INTO books SET ?', book);
 }
 
 module.exports.createAuthor = createAuthor;
