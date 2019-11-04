@@ -16,6 +16,7 @@ function findAllBooks(params) {
     return db.databaseTransaction(query); 
 }
 
+
 function _createConditionQuery(query, params) {
     let condition = {
         filterField: params.filterField,

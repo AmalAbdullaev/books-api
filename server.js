@@ -1,4 +1,4 @@
-const port = 3000;
+const PORT = 3000;
 const Koa = require('koa2');
 const app = new Koa();
 const Router = require('koa-router');
@@ -8,14 +8,16 @@ const updateController = require('./controllers/update.controller');
 const createController = require('./controllers/create.controller');
 const deleteController = require('./controllers/delete.controller');
 const koaBody = require('koa-body');
+const fs = require('fs');
 
+let api = fs.readFileSync('api.json');
 app.use(koaBody());
 
 router.get('/', (ctx, next) => {
-    ctx.body = 'hello';
+    ctx.body = JSON.parse(api);
 })
 
-router.get('/author/:id', (ctx, next) => {
+router.get('/author/:id', (ctx, cache) => {
     return readController.findOneAuthor(ctx.params.id).then((res) => {
         ctx.body = res;
     })
@@ -97,7 +99,6 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-
-app.listen(port, function () {
-    console.log(`app listening on port ${port}`)
+app.listen(PORT, function () {
+    console.log(`app listening on port ${PORT}`)
 });
